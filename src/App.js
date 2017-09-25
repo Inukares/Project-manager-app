@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TopBar from './TopBar.js';
+import TopBar from './presentational/TopBar.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Toggle from 'material-ui/Toggle';
-import ExpandingCard from './ExpandingCard.js'
-import Procedure from './Procedure.js'
-import './App.css';
+import ExpandingCard from './presentational/ExpandingCard.js'
+import Procedures from './container/Procedures.js'
 
 const projects = [
   {
@@ -25,34 +24,34 @@ const projects = [
 const library = [
   {
     procedureName:'Build Foundations',
-    id:1, // still not sure about it
+    id:1,
     tasks:[  
       {
-        taskName:'dig at least 1m deep', isCompleted:false 
+        taskName:'dig at least 1m deep', isCompleted:false, procedureId:1
       },
       {
-        taskName:'At least 50m wide digging', isCompleted:false
+        taskName:'At least 50m wide digging', isCompleted:false, procedureId:1
       },
       {
-        taskName:'Buy megazords', isCompleted:false
+        taskName:'Buy megazords', isCompleted:false, procedureId:1
       }
     ]
-  }, // end of build foundations procedure
+  }, 
   {
     procedureName:'Building the roof',
     id:2,
     tasks:[
       {
-        taskName:'Constructed according to the project', isCompleted:false 
+        taskName:'Constructed according to the project', isCompleted:false, procedureId:2
       },
       {
-        taskName:'Defend wood from humidity', isCompleted:false
+        taskName:'Protect wood from humidity', isCompleted:false, procedureId:2
       },
       {
-        taskName:'Roof build with the correct angle', isCompleted:false
+        taskName:'Roof build with the correct angle', isCompleted:false, procedureId:2
       }
     ]
-  } // end of building the roof procedure
+  } 
 ]
 
 class App extends Component {
@@ -66,33 +65,36 @@ class App extends Component {
 
     }
   }
+
+  onTaskToggle = (task) => {
+    const findProcedure = library => library.filter(procedure => procedure.id === task.procedureId);
+    
+    const findTask = tasks => tasks.filter(singleTask => singleTask.taskName === task.taskName);
+    const toggledTask = findTask(findProcedure(this.state.library)[0].tasks);
+    //console.log(toggledTask);
+    const procedureIndex =  this.state.library.indexOf(findProcedure(this.state.library)[0]);
+    const toggledTaskIndex = this.state.library[procedureIndex].tasks.indexOf(toggledTask[0]);
+    const insideProcedure = this.state.library[procedureIndex];
+    const insideTask = this.state.library[procedureIndex].tasks.indexOf(toggledTask[0]);
+   // console.log(toggledTaskIndex);
+    this.setState({
+      ...library
+    })
+}
+
   render() {
     const {projects, library, expanded} = this.state;
     return (
       <MuiThemeProvider>
         <div>
-        <TopBar/>
-        <ExpandingCard projects={projects} />
-        <Procedure library={library}/>
-        <ListingTheTasks library={library}/>
+          <TopBar/>
+          <ExpandingCard projects={projects} />
+          <Procedures library={library} onTaskToggle={this.onTaskToggle}/>
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-const ListingTheTasks = (props) => {
- const list = (
-    props.library.map((task, index) => { // under this line goes mapping through procedures
-      task.tasks.map((element, id) => {
-        return <p>{element.taskName}</p>
-      })
-    })
-  ); 
-  return <div>{list}</div> 
-}
-
-
-//export default AppBarExampleIcon;
 
 export default App;

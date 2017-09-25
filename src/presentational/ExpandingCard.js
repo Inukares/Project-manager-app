@@ -36,7 +36,6 @@ export default class ExpandingCard extends React.Component {
   };
 
   render() {
-    console.log(this.props.projects[0].projectName) // gets the project name
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
