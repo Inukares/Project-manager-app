@@ -6,14 +6,12 @@ export default class Procedures extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         };
     } 
 
     render() {
         return (
             <div>
-                <Card>
                     {
                         <ProceduresList
                           library={this.props.library}
@@ -22,7 +20,6 @@ export default class Procedures extends Component {
                           onProcedureToggle={this.props.onProcedureToggle}
                         />
                     }
-                </Card>
             </div>
         );
     }

@@ -3,26 +3,24 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from './presentational/TopBar.js';
 import ExpandingCard from './presentational/ExpandingCard.js'
 import Procedures from './container/Procedures.js'
+import AddProcedureButton from './container/AddProcedureButton.js'
+import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap'
 
 const projects = [
   {
-    projectName: 'Building the skyscraper',
-    where: 'Warsaw',
-    startDate: '30/08/2017',
-    endDate: '30/12/2017'
-  },
-  {
-    projectName: 'Making a nice elevation',
-    where: 'London',
-    startDate: '20/06/2018',
-    endDate: '20/10/2018'
+    projectName: '',
+    projectId:1,
+    where: '',
+    startDate: '',
+    endDate: '',
+    activeProcedures:[],
   }
 ]
 
 const library = [
   {
     procedureName:'Build Foundations',
-    isVisible:false, // After clicking a button possible procedures will be rendered
+    isVisible:false,
     expanded:false,
     completedTasks:0,
     id:1,
@@ -68,33 +66,37 @@ class App extends Component {
     }
   }
 
-onTaskToggle = (task, procedure) => {
-  if(task.isCompleted === false){
-   procedure.completedTasks += 1;
-   this.setState({
-     procedure
-    }) 
+  onTaskToggle = (task, procedure) => {
+    if(task.isCompleted === false){
+    procedure.completedTasks += 1;
+    this.setState({
+      procedure
+      }) 
+    }
+
+    if(task.isCompleted === true){
+      procedure.completedTasks -= 1;
+      this.setState({
+        procedure
+      })
+    }
+
+    task.isCompleted = !task.isCompleted; // required in order to setState
+    this.setState({
+      task
+    })
   }
 
-  if(task.isCompleted === true){
-    procedure.completedTasks -= 1;
+  onProcedureToggle = (procedure) => {
+    procedure.expanded = !procedure.expanded;
     this.setState({
       procedure
     })
   }
 
-  task.isCompleted = !task.isCompleted; // required in order to setState
-  this.setState({
-    task
-  })
-}
-
-onProcedureToggle = (procedure) => {
-  procedure.expanded = !procedure.expanded;
-  this.setState({
-    procedure
-  })
-}
+  handleNameInput = (e, id) => {
+    console.log(projects[id]);
+  }
 
 
   render() {
@@ -103,13 +105,31 @@ onProcedureToggle = (procedure) => {
       <MuiThemeProvider>
         <div>
           <TopBar/>
-          <ExpandingCard projects={projects} />
-          <Procedures
+          <ExpandingCard
             library={library}
             tasks={this.state.tasks}
             onTaskToggle={this.onTaskToggle}
             onProcedureToggle={this.onProcedureToggle}
-          />
+            projects={this.state.projects}
+           />
+       
+
+           <form>
+            <FormGroup
+              controlId="formBasicText"
+            >
+              <ControlLabel>Working example with validation</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Enter text"
+                onClick={() => this.handleNameInput}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length.</HelpBlock>
+            </FormGroup>
+          </form>
+
+
         </div>
       </MuiThemeProvider>
     );
@@ -118,8 +138,3 @@ onProcedureToggle = (procedure) => {
 
 
 export default App;
-
-
-// Do dodania: po kliknieciu guzika (ADD PROCEDURE) pojawiają się (disabled -- to chyba dobry pomysł na później) 
-//procedury z biblioteki. Dodać do tych where itd. zmienianie danych na podstawie arrayki.
-// pamietaj zeby umiescic to wszystko wewnatrz karty z otworzonym projektem

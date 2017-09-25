@@ -4,9 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import AddProcedureButton from './../container/AddProcedureButton.js'
 
-const style = {  // Add here style for this span, it should be big to show what is title of project
-  textAlign:'center'
+const style = { 
+  textAlign:'center',
+  fontWeight:'600'
 }
 
 export default class ExpandingCard extends React.Component {
@@ -27,19 +29,12 @@ export default class ExpandingCard extends React.Component {
     this.setState({expanded: toggle});
   };
 
-  handleExpand = () => {
-    this.setState({expanded: true});
-  };
-
-  handleReduce = () => {
-    this.setState({expanded: false});
-  };
 
   render() {
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
-          title="Nazwa Projektu"
+          title="Click to open your project"
           style={this.state.style} // not sure if should be passed as props or just pass const object
           actAsExpander={true}
           showExpandableButton={true}
@@ -51,11 +46,14 @@ export default class ExpandingCard extends React.Component {
           <p>When it starts:</p>
           <Divider/>
           <p>When it ends:</p>
+          <Divider/>
+          <AddProcedureButton
+            library={this.props.library}
+            tasks={this.props.tasks}
+            onTaskToggle={this.props.onTaskToggle}
+            onProcedureToggle={this.props.onProcedureToggle}
+          />
         </CardText>
-        <CardActions>
-          <FlatButton label="Expand" onClick={this.handleExpand} />
-          <FlatButton label="Reduce" onClick={this.handleReduce} />
-        </CardActions>
       </Card>
     );
   }
