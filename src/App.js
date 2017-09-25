@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from './presentational/TopBar.js';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import Toggle from 'material-ui/Toggle';
 import ExpandingCard from './presentational/ExpandingCard.js'
 import Procedures from './container/Procedures.js'
 
@@ -24,34 +22,39 @@ const projects = [
 const library = [
   {
     procedureName:'Build Foundations',
+    isVisible:false, // After clicking a button possible procedures will be rendered
+    expanded:false,
+    completedTasks:0,
     id:1,
-    tasks:[  
-      {
-        taskName:'dig at least 1m deep', isCompleted:false, procedureId:1
-      },
-      {
-        taskName:'At least 50m wide digging', isCompleted:false, procedureId:1
-      },
-      {
-        taskName:'Buy megazords', isCompleted:false, procedureId:1
-      }
-    ]
   }, 
   {
     procedureName:'Building the roof',
+    isVisible:false,
+    expanded:false,
+    completedTasks:0,
     id:2,
-    tasks:[
-      {
-        taskName:'Constructed according to the project', isCompleted:false, procedureId:2
-      },
-      {
-        taskName:'Protect wood from humidity', isCompleted:false, procedureId:2
-      },
-      {
-        taskName:'Roof build with the correct angle', isCompleted:false, procedureId:2
-      }
-    ]
   } 
+]
+
+ const tasks = [  
+  {
+    taskName:'dig at least 1m deep', isCompleted:false, procedureId:1
+  },
+  {
+    taskName:'At least 50m wide digging', isCompleted:false, procedureId:1
+  },
+  {
+    taskName:'Buy megazords', isCompleted:false, procedureId:1
+  },
+  {
+    taskName:'Constructed according to the project', isCompleted:false, procedureId:2
+  },
+  {
+    taskName:'Protect wood from humidity', isCompleted:false, procedureId:2
+  },
+  {
+    taskName:'Roof build with the correct angle', isCompleted:false, procedureId:2
+  }
 ]
 
 class App extends Component {
@@ -61,35 +64,52 @@ class App extends Component {
     this.state = {
       projects,
       library,
-      expanded:false
-
+      tasks,
     }
   }
 
-  onTaskToggle = (task) => {
-    const findProcedure = library => library.filter(procedure => procedure.id === task.procedureId);
-    
-    const findTask = tasks => tasks.filter(singleTask => singleTask.taskName === task.taskName);
-    const toggledTask = findTask(findProcedure(this.state.library)[0].tasks);
-    //console.log(toggledTask);
-    const procedureIndex =  this.state.library.indexOf(findProcedure(this.state.library)[0]);
-    const toggledTaskIndex = this.state.library[procedureIndex].tasks.indexOf(toggledTask[0]);
-    const insideProcedure = this.state.library[procedureIndex];
-    const insideTask = this.state.library[procedureIndex].tasks.indexOf(toggledTask[0]);
-   // console.log(toggledTaskIndex);
+onTaskToggle = (task, procedure) => {
+  if(task.isCompleted === false){
+   procedure.completedTasks += 1;
+   this.setState({
+     procedure
+    }) 
+  }
+
+  if(task.isCompleted === true){
+    procedure.completedTasks -= 1;
     this.setState({
-      ...library
+      procedure
     })
+  }
+
+  task.isCompleted = !task.isCompleted; // required in order to setState
+  this.setState({
+    task
+  })
 }
 
+onProcedureToggle = (procedure) => {
+  procedure.expanded = !procedure.expanded;
+  this.setState({
+    procedure
+  })
+}
+
+
   render() {
-    const {projects, library, expanded} = this.state;
+    const {projects, library, expanded, tasks} = this.state;
     return (
       <MuiThemeProvider>
         <div>
           <TopBar/>
           <ExpandingCard projects={projects} />
-          <Procedures library={library} onTaskToggle={this.onTaskToggle}/>
+          <Procedures
+            library={library}
+            tasks={this.state.tasks}
+            onTaskToggle={this.onTaskToggle}
+            onProcedureToggle={this.onProcedureToggle}
+          />
         </div>
       </MuiThemeProvider>
     );
@@ -98,3 +118,8 @@ class App extends Component {
 
 
 export default App;
+
+
+// Do dodania: po kliknieciu guzika (ADD PROCEDURE) pojawiają się (disabled -- to chyba dobry pomysł na później) 
+//procedury z biblioteki. Dodać do tych where itd. zmienianie danych na podstawie arrayki.
+// pamietaj zeby umiescic to wszystko wewnatrz karty z otworzonym projektem
