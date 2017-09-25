@@ -7,7 +7,7 @@ const TopBar = () => {
     className="text-center"
     title="App for the best builders"
     showMenuIconButton={false}
-    iconClassNameRight="search-button" // dodaj potem, narazie malo wazne
+    iconClassNameRight="search-button"
     />
     )
 }

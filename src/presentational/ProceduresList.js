@@ -7,7 +7,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const styles = {marginBottom:'-8px'}
 
-
 const ProceduresList = props => {
     const list = props.library.map(procedure => {
         const {id, procedureName} = procedure; 
@@ -42,6 +41,3 @@ const ProceduresList = props => {
 }
 
 export default ProceduresList;
-
-
-//     console.log(props.tasks.filter(singletask => singletask.procedureId === id));

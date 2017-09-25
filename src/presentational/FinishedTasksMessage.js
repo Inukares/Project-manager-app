@@ -1,6 +1,5 @@
 import React from 'react';
 import Subheader from 'material-ui/Subheader'
-import ListItem from 'material-ui/List'
 
 const styles = {
     lineHeight:'32px',

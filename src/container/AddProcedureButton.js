@@ -30,7 +30,7 @@ class AddProcedureButton extends Component {
             <RaisedButton
               label="Add procedure to your project"
               onClick={() => this.onButtonToggle(isButtonClicked)}
-              primary={true}
+              secondary={true}
               style={style} 
               fullWidth={true}
             />

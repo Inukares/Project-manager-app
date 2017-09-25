@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Card} from 'material-ui/Card';
 import ProceduresList from '../presentational/ProceduresList'
 
 export default class Procedures extends Component {

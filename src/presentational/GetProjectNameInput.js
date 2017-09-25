@@ -1,6 +1,5 @@
 import React from 'react'
-import { FormGroup,  Button, FormControl, ControlLabel } from 'react-bootstrap';
-import Divider from 'material-ui/Divider';
+import { Button } from 'react-bootstrap';
 import Subheader from 'material-ui/Subheader'
 
 const GetProjectNameInput = props => {

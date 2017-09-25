@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from './presentational/TopBar.js';
 import ExpandingCard from './presentational/ExpandingCard.js'
-import Procedures from './container/Procedures.js'
-import AddProcedureButton from './container/AddProcedureButton.js'
-import { FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 
 const projects = [
   {
     projectName: '',
     projectId:1,
     where: '',
-    startDate: '',
-    endDate: '',
+    startDate: {},
+    startDateShown:'',
+    endDate: {},
+    endDateShown:'',
     activeProcedures:[],
   }
 ]
@@ -112,9 +111,25 @@ class App extends Component {
     })
   }
 
+  handleStartDate =  (e, date, project) => {
+    project.startDate = date;
+    project.startDateShown = date.toLocaleDateString();
+    this.setState({
+      project
+    })
+  }
+
+  handleEndDate =  (e, date, project) => {
+     project.endDate = date;
+     project.startDateShown = date.toLocaleDateString();
+     this.setState({
+       project
+     })
+   }
 
   render() {
-    const {projects, library, expanded, tasks} = this.state;
+    const {library, tasks} = this.state;
+    console.log(this.state);
     return (
       <MuiThemeProvider>
         <div>
@@ -131,6 +146,8 @@ class App extends Component {
                     project={singleproject}
                     handleNameInput={this.handleNameInput}
                     handleWhereInput={this.handleWhereInput}
+                    handleStartDate={this.handleStartDate}
+                    handleEndDate={this.handleEndDate}
                   />
                 </div>
               )

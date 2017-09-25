@@ -1,21 +1,15 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import AddProcedureButton from './../container/AddProcedureButton.js'
 import GetProjectNameInput from './GetProjectNameInput.js'
 import GetProjectPlaceInput from './GetProjectPlaceInput.js'
+import GetStartDate from './GetStartDate.js'
+import GetEndDate from './GetEndDate.js';
 import Subheader from 'material-ui/Subheader';
 
 const style = {  // Add here style for this span, it should be big to show what is title of project
   textAlign:'center',
   fontWeight:'600',
-}
-
-const subStyle = {
-  textAlign:'center',
 }
 
 const h4Style = {
@@ -78,20 +72,37 @@ export default class ExpandingCard extends React.Component {
     }
   }
 
+  renderEndDate = () => {
+    let isDateSet = this.props.project.startDate;
+    let parsedDate = Date.parse(isDateSet);
+    if((parsedDate) !== 0 && Number.isFinite(parsedDate)){
+      return(
+        <GetEndDate
+        project={this.props.project}
+        handleEndDate={this.props.handleEndDate}
+      />
+      )
+    }
+  } 
 
   render() {
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
           title="Click to open your project"
-          style={this.state.style} // not sure if should be passed as props or just pass const object
+          style={style}
           actAsExpander={true}
           showExpandableButton={true}
         />
         <CardText expandable={true} style={paddingStyle} >
           <div className="text-center" >
-              {this.renderInputNameField([...this.props])}
-              {this.renderInputWhereField([...this.props])}
+            {this.renderInputNameField([...this.props])}
+            {this.renderInputWhereField([...this.props])}
+            <GetStartDate
+              project={this.props.project}
+              handleStartDate={this.props.handleStartDate}
+            />
+            {this.renderEndDate()}
           </div>
           <AddProcedureButton
             library={this.props.library}
@@ -104,4 +115,3 @@ export default class ExpandingCard extends React.Component {
     );
   }
 }
-
