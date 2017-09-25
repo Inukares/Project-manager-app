@@ -5,11 +5,24 @@ import Toggle from 'material-ui/Toggle';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import AddProcedureButton from './../container/AddProcedureButton.js'
+import GetProjectNameInput from './GetProjectNameInput.js'
+import GetProjectPlaceInput from './GetProjectPlaceInput.js'
+import Subheader from 'material-ui/Subheader';
 
-const style = { 
+const style = {  // Add here style for this span, it should be big to show what is title of project
   textAlign:'center',
-  fontWeight:'600'
+  fontWeight:'600',
 }
+
+const subStyle = {
+  textAlign:'center',
+}
+
+const h4Style = {
+  margin:'-6px 0 0 0'
+}
+
+const paddingStyle={paddingLeft:'0px'};
 
 export default class ExpandingCard extends React.Component {
 
@@ -29,6 +42,42 @@ export default class ExpandingCard extends React.Component {
     this.setState({expanded: toggle});
   };
 
+  renderInputNameField = (props) => {
+    if(this.props.project.projectName.length === 0){
+      return(
+        <GetProjectNameInput
+        project={this.props.project}
+        handleNameInput={this.props.handleNameInput}
+        />
+      )
+    } else {
+      return (
+      <div>
+        <Subheader>Name of your project</Subheader>
+          <h4 style={h4Style} >{this.props.project.projectName}</h4>
+      </div>
+    )
+    }
+  }
+
+  renderInputWhereField = (props) => {
+    if(this.props.project.where.length === 0){
+      return(
+        <GetProjectPlaceInput
+          project={this.props.project}
+          handleWhereInput={this.props.handleWhereInput}
+        />
+      )
+    } else {
+      return (
+      <div>
+        <Subheader>Where your project takes place:</Subheader>
+          <h4 style={h4Style} >{this.props.project.where}</h4>
+      </div>
+    )
+    }
+  }
+
 
   render() {
     return (
@@ -39,14 +88,11 @@ export default class ExpandingCard extends React.Component {
           actAsExpander={true}
           showExpandableButton={true}
         />
-        <CardTitle title="Data about the project" expandable={true} />
-        <CardText expandable={true}>
-          <p>Where:</p>
-          <Divider/>
-          <p>When it starts:</p>
-          <Divider/>
-          <p>When it ends:</p>
-          <Divider/>
+        <CardText expandable={true} style={paddingStyle} >
+          <div className="text-center" >
+              {this.renderInputNameField([...this.props])}
+              {this.renderInputWhereField([...this.props])}
+          </div>
           <AddProcedureButton
             library={this.props.library}
             tasks={this.props.tasks}

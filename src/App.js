@@ -4,7 +4,7 @@ import TopBar from './presentational/TopBar.js';
 import ExpandingCard from './presentational/ExpandingCard.js'
 import Procedures from './container/Procedures.js'
 import AddProcedureButton from './container/AddProcedureButton.js'
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap'
+import { FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 
 const projects = [
   {
@@ -81,7 +81,7 @@ class App extends Component {
       })
     }
 
-    task.isCompleted = !task.isCompleted; // required in order to setState
+    task.isCompleted = !task.isCompleted;
     this.setState({
       task
     })
@@ -94,8 +94,22 @@ class App extends Component {
     })
   }
 
-  handleNameInput = (e, id) => {
-    console.log(projects[id]);
+  handleNameInput = (e, project) => {
+    e.preventDefault();
+    const projectName = e.target.projectName.value;
+    project.projectName = projectName;
+    this.setState({
+      project
+    })
+  }
+
+  handleWhereInput = (e, project) => {
+    e.preventDefault();
+    const where = e.target.where.value;
+    project.where = where;
+    this.setState({
+      where
+    })
   }
 
 
@@ -104,32 +118,23 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <TopBar/>
-          <ExpandingCard
-            library={library}
-            tasks={this.state.tasks}
-            onTaskToggle={this.onTaskToggle}
-            onProcedureToggle={this.onProcedureToggle}
-            projects={this.state.projects}
-           />
-       
-
-           <form>
-            <FormGroup
-              controlId="formBasicText"
-            >
-              <ControlLabel>Working example with validation</ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Enter text"
-                onClick={() => this.handleNameInput}
-              />
-              <FormControl.Feedback />
-              <HelpBlock>Validation is based on string length.</HelpBlock>
-            </FormGroup>
-          </form>
-
-
+          {
+            this.state.projects.map(singleproject =>{
+              return (
+                <div key={singleproject.projectId}>
+                  <TopBar/>
+                  <ExpandingCard
+                    library={library}
+                    tasks={tasks}
+                    onTaskToggle={this.onTaskToggle}
+                    onProcedureToggle={this.onProcedureToggle}
+                    project={singleproject}
+                    handleNameInput={this.handleNameInput}
+                    handleWhereInput={this.handleWhereInput}
+                  />
+                </div>
+              )
+            })}
         </div>
       </MuiThemeProvider>
     );
