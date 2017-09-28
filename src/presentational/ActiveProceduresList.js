@@ -1,9 +1,12 @@
 import React from 'react';
-import ListingTasks from '../container/ListingTasks';
+import ListingAddedTasks from '../container/ListingAddedTasks';
 import FinishedTasksMessage from './FinishedTasksMessage.js';
 import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentDeleteSweep from 'material-ui/svg-icons/content/delete-sweep'
+
+
+const editsvg = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 10l-6-6H4c-1.1 0-2 .9-2 2v12.01c0 1.1.9 1.99 2 1.99l16-.01c1.1 0 2-.89 2-1.99v-8zm-7-4.5l5.5 5.5H15V5.5z"/></svg>
 
 const styles = {marginBottom:'-8px'}
 
@@ -16,18 +19,23 @@ const ActiveProceduresList = props => {
                   className="text-center"
                   open={procedure.expanded}
                   primaryText={procedureName} 
+                  rightIconButton={(
+                      <FloatingActionButton mini={true} onClick={() => props.deleteActiveProcedure(procedure)}>
+                          <ContentDeleteSweep/>
+                      </FloatingActionButton>
+                    )}
                   onClick={() => props.onProcedureToggle(procedure)} nestedItems = {[
                     <FinishedTasksMessage 
                     key={id}
                     procedure={procedure}
                     tasks={props.tasks.filter(singletask => singletask.procedureId === id)}
                     />,
-                    <ListingTasks 
+                    <ListingAddedTasks 
                         key={procedureName}
                         tasks={props.tasks.filter(singletask => singletask.procedureId === id)}
                         procedure={procedure}
                         onTaskToggle={props.onTaskToggle}
-                        />
+                    />
                 ]}/>
             </List>
         )

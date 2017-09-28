@@ -22,17 +22,12 @@ const ProceduresList = props => {
                       </FloatingActionButton>
                     )}
                   onClick={() => props.onProcedureToggle(procedure)} nestedItems = {[
-                    <FinishedTasksMessage 
-                    key={id}
-                    procedure={procedure}
-                    tasks={props.tasks.filter(singletask => singletask.procedureId === id)}
-                    />,
                     <ListingTasks 
                         key={procedureName}
                         tasks={props.tasks.filter(singletask => singletask.procedureId === id)}
                         procedure={procedure}
                         onTaskToggle={props.onTaskToggle}
-                        />
+                    />
                 ]}/>
             </List>
         )

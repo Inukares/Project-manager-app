@@ -8,16 +8,17 @@ import GetEndDate from './GetEndDate.js';
 import Subheader from 'material-ui/Subheader';
 import ActiveProceduresList from './ActiveProceduresList.js'
 
-const style = {  // Add here style for this span, it should be big to show what is title of project
+const style = {
   textAlign:'center',
   fontWeight:'600',
+  marginLeft:'30px'
 }
 
 const h4Style = {
   margin:'-6px 0 0 0'
 }
 
-const paddingStyle={paddingLeft:'0px'};
+const paddingStyle={paddingLeft:'0px',paddingRight:'29px', margin:'0 auto', width:'100%'};
 
 const activeProcedures = [];
 
@@ -62,10 +63,10 @@ export default class ExpandingCard extends React.Component {
     let activeProcedures = this.state.activeProcedures;
     let copiedProcedure = JSON.parse(JSON.stringify(procedure));
     let flag = true;
-    activeProcedures.map(singleprocedure => { // IF IT WILL RETURN TRUE, EXIT WHOLE FUNCTION
+    activeProcedures.map(singleprocedure => {
       if(JSON.stringify(singleprocedure) === JSON.stringify(procedure))
       {
-        flag = false;
+       return flag = false;
       }});
     if(flag)
     {
@@ -75,6 +76,17 @@ export default class ExpandingCard extends React.Component {
       activeProcedures
     })
   }
+
+  deleteActiveProcedure = (procedure) => {
+    let activeProcedures = this.state.activeProcedures;
+    let deleteId = procedure.id;
+    let newActiveProcedures = JSON.parse(JSON.stringify(activeProcedures.filter(singleprocedure => {
+      return singleprocedure.id !== deleteId;
+    })))
+    this.setState({
+      activeProcedures:newActiveProcedures
+    })
+  } 
 
   renderInputWhereField = (props) => {
     if(this.props.project.where.length === 0){
@@ -125,41 +137,23 @@ export default class ExpandingCard extends React.Component {
               handleStartDate={this.props.handleStartDate}
             />
             {this.renderEndDate()}
-            <ActiveProceduresList
+           <ActiveProceduresList
             library={this.state.activeProcedures}
             tasks={this.props.tasks}
             onTaskToggle={this.props.onTaskToggle}
             onProcedureToggle={this.props.onProcedureToggle}
+            deleteActiveProcedure={this.deleteActiveProcedure}
           />
           </div>
-          <AddProcedureButton
-            library={this.props.library}
-            tasks={this.props.tasks}
-            onTaskToggle={this.props.onTaskToggle}
-            onProcedureToggle={this.props.onProcedureToggle}
-            handleActiveProcedures={this.handleActiveProcedures}
-          />
+           <AddProcedureButton
+             library={this.props.library}
+             tasks={this.props.tasks}
+             onTaskToggle={this.props.onTaskToggle}
+             onProcedureToggle={this.props.onProcedureToggle}
+             handleActiveProcedures={this.handleActiveProcedures}
+           />
         </CardText>
       </Card>
     );
   }
 }
-
-
-/*        <ActiveProceduresList
-            library={this.props.library}
-            tasks={this.props.tasks}
-            onTaskToggle={this.props.onTaskToggle}
-            onProcedureToggle={this.props.onProcedureToggle}
-          />
- */
-
- /* if(!Array.isArray(activeProcedures) || activeProcedures.length){
-      activeProcedures.push(copiedProcedure);
-      console.log(this.state)
-      console.log('hi from if statement !');
-    } else {
-      activeProcedures.push(copiedProcedure);
-      console.log(activeProcedures)
-      console.log('hi from else statement !');
-    }  */ 

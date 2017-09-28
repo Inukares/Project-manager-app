@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 12,
+  padding: 0,
 //  width:'100%',
   textAlign:'center'
 };

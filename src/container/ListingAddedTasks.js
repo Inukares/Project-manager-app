@@ -11,14 +11,18 @@ const styles = {
     }
 }
 
-const ListingTasks = (props) => {
+const ListingAddedTasks = (props) => {
   const list = props.tasks.map(task => { 
     const taskName = task.taskName;
     return (
-      <Checkbox style={styles.checkBox} labelStyle={styles.input} checked={false} disabled={true} key={taskName} label={taskName}/>
+      <Checkbox style={styles.checkBox} labelStyle={styles.input} checked={task.isCompleted} key={taskName} onClick={() => props.onTaskToggle(task, props.procedure)} label={taskName}/>
   )
   })
   return <div>{list}</div> 
 }
 
-export default ListingTasks
+export default ListingAddedTasks 
+
+
+
+

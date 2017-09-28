@@ -24,33 +24,46 @@ const library = [
     id:1,
   }, 
   {
-    procedureName:'Building the roof',
+    procedureName:'Create your own aquapark',
     isVisible:false,
     expanded:false,
     completedTasks:0,
     id:2,
+  },
+  {
+    procedureName:'Build the stadium',
+    isVisible:false,
+    expanded:false,
+    completedTasks:0,
+    id:3,
   } 
 ]
 
  const tasks = [  
   {
-    taskName:'dig at least 1m deep', isCompleted:false, procedureId:1
+    taskName:'Dig at least 1m deep', isCompleted:false, procedureId:1
   },
   {
     taskName:'At least 50m wide digging', isCompleted:false, procedureId:1
   },
   {
-    taskName:'Buy megazords', isCompleted:false, procedureId:1
+    taskName:'Buy megazords to do the job for you', isCompleted:false, procedureId:1
   },
   {
-    taskName:'Constructed according to the project', isCompleted:false, procedureId:2
+    taskName:'Construct according to the project', isCompleted:false, procedureId:2
   },
   {
-    taskName:'Protect wood from humidity', isCompleted:false, procedureId:2
+    taskName:'Gather a lot of people', isCompleted:false, procedureId:2
   },
   {
-    taskName:'Roof build with the correct angle', isCompleted:false, procedureId:2
-  }
+    taskName:'Jump to the water', isCompleted:false, procedureId:2
+  },
+  {
+    taskName:`Hire someone and hope he'll do his job well`, isCompleted:false, procedureId:3
+  },
+  {
+    taskName:'Cry', isCompleted:false, procedureId:3
+  },
 ]
 
 class App extends Component {
@@ -162,23 +175,3 @@ class App extends Component {
 
 
 export default App;
-
-
-
-/*    handleAddProcedure = (procedure) => {
-     // let copy = JSON.parse(JSON.stringify(procedure));
-      let activeProcedures = this.state.projects.activeProcedures;
-      let copiedProcedure = {};
-    /*  if(activeProcedures === undefined || activeProcedures.length === 0){
-        activeProcedures  = JSON.parse(JSON.stringify(procedure));
-        console.log(this.state)
-      } else {
-        activeProcedures = [...activeProcedures, copiedProcedure];
-        console.log(activeProcedures)
-      } 
-      this.setState({
-        activeProcedures
-      }) 
-
-       HOW TO APPEND TO THIS.STATE.PROJECT.ACTIVEPROCEDURES A PROCEDURE FROM PROCEDURESLIST
-    } */ 
