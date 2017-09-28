@@ -6,14 +6,13 @@ import ExpandingCard from './presentational/ExpandingCard.js'
 const projects = [
   {
     projectName: '',
-    projectId:1,
+ //   projectId:0,
     where: '',
     startDate: {},
     startDateShown:'',
     endDate: {},
     endDateShown:'',
-    activeProcedures:[],
-  }
+  },
 ]
 
 const library = [
@@ -127,14 +126,17 @@ class App extends Component {
      })
    }
 
+   // if activeprocedures includes procedure of certain name
+
   render() {
+   // console.log(this.state)
     const {library, tasks} = this.state;
-    console.log(this.state);
     return (
       <MuiThemeProvider>
         <div>
           {
-            this.state.projects.map(singleproject =>{
+            this.state.projects.map((singleproject, index) =>{
+              singleproject.projectId = index;
               return (
                 <div key={singleproject.projectId}>
                   <TopBar/>
@@ -160,3 +162,23 @@ class App extends Component {
 
 
 export default App;
+
+
+
+/*    handleAddProcedure = (procedure) => {
+     // let copy = JSON.parse(JSON.stringify(procedure));
+      let activeProcedures = this.state.projects.activeProcedures;
+      let copiedProcedure = {};
+    /*  if(activeProcedures === undefined || activeProcedures.length === 0){
+        activeProcedures  = JSON.parse(JSON.stringify(procedure));
+        console.log(this.state)
+      } else {
+        activeProcedures = [...activeProcedures, copiedProcedure];
+        console.log(activeProcedures)
+      } 
+      this.setState({
+        activeProcedures
+      }) 
+
+       HOW TO APPEND TO THIS.STATE.PROJECT.ACTIVEPROCEDURES A PROCEDURE FROM PROCEDURESLIST
+    } */ 

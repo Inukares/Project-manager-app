@@ -41,6 +41,8 @@ class AddProcedureButton extends Component {
                   tasks={this.props.tasks}
                   onTaskToggle={this.props.onTaskToggle}
                   onProcedureToggle={this.props.onProcedureToggle}
+                  handleAddProcedure={this.props.handleAddProcedure}
+                  handleActiveProcedures={this.props.handleActiveProcedures}
                 />
             }
             </div>

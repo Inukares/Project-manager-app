@@ -17,6 +17,8 @@ export default class Procedures extends Component {
                           tasks={this.props.tasks}
                           onTaskToggle={this.props.onTaskToggle}
                           onProcedureToggle={this.props.onProcedureToggle}
+                          handleActiveProcedures={this.props.handleActiveProcedures}
+                          
                         />
                     }
             </div>
