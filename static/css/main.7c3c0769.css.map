@@ -1,1 +1,0 @@
-{"version":3,"sources":["customstylesheets/dates.css"],"names":[],"mappings":"AAAA,MACI,iBAAkB","file":"static/css/main.7c3c0769.css","sourcesContent":["#date{\n    text-align:center;\n}\n\n\n// WEBPACK FOOTER //\n// ./src/customstylesheets/dates.css"],"sourceRoot":""}
