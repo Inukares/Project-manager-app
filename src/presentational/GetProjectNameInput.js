@@ -19,5 +19,3 @@ const GetProjectNameInput = props => {
 }
 
 export default GetProjectNameInput;
-
-//onSubmit={(e, project.projectId) => (props.handleNameInput)}

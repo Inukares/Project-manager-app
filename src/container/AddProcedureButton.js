@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Procedures from './Procedures.js'
-
 import RaisedButton from 'material-ui/RaisedButton';
+import ProceduresList from '../presentational/ProceduresList'
 
 const style = {
-  margin: 12,
+  margin:'12px 12px 12px',
+  marginLeft: '15px',
   padding: 0,
-//  width:'100%',
   textAlign:'center'
 };
 
@@ -37,12 +36,11 @@ class AddProcedureButton extends Component {
             />
             {
             isButtonClicked && 
-                <Procedures
+                <ProceduresList
                   library={this.props.library}
                   tasks={this.props.tasks}
                   onTaskToggle={this.props.onTaskToggle}
                   onProcedureToggle={this.props.onProcedureToggle}
-                  handleAddProcedure={this.props.handleAddProcedure}
                   handleActiveProcedures={this.props.handleActiveProcedures}
                 />
             }

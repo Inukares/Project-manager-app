@@ -6,12 +6,9 @@ import ExpandingCard from './presentational/ExpandingCard.js'
 const projects = [
   {
     projectName: '',
- //   projectId:0,
     where: '',
     startDate: {},
-    startDateShown:'',
     endDate: {},
-    endDateShown:'',
   },
 ]
 
@@ -21,48 +18,33 @@ const library = [
     isVisible:false,
     expanded:false,
     completedTasks:0,
-    id:1,
   }, 
   {
     procedureName:'Create your own aquapark',
     isVisible:false,
     expanded:false,
     completedTasks:0,
-    id:2,
   },
-  {
-    procedureName:'Build the stadium',
-    isVisible:false,
-    expanded:false,
-    completedTasks:0,
-    id:3,
-  } 
 ]
 
  const tasks = [  
   {
-    taskName:'Dig at least 1m deep', isCompleted:false, procedureId:1
+    taskName:'Dig at least 1m deep', isCompleted:false,
   },
   {
-    taskName:'At least 50m wide digging', isCompleted:false, procedureId:1
+    taskName:'At least 50m wide digging', isCompleted:false, 
   },
   {
-    taskName:'Buy megazords to do the job for you', isCompleted:false, procedureId:1
+    taskName:'Buy megazords to do the job for you', isCompleted:false,
   },
   {
-    taskName:'Construct according to the project', isCompleted:false, procedureId:2
+    taskName:'Construct according to the project', isCompleted:false,
   },
   {
-    taskName:'Gather a lot of people', isCompleted:false, procedureId:2
+    taskName:'Gather a lot of people', isCompleted:false,
   },
   {
-    taskName:'Jump to the water', isCompleted:false, procedureId:2
-  },
-  {
-    taskName:`Hire someone and hope he'll do his job well`, isCompleted:false, procedureId:3
-  },
-  {
-    taskName:'Cry', isCompleted:false, procedureId:3
+    taskName:'Jump to the water', isCompleted:false,
   },
 ]
 
@@ -139,17 +121,38 @@ class App extends Component {
      })
    }
 
-   // if activeprocedures includes procedure of certain name
+  setProcedureId = () => {
+        const tasks = this.state.tasks;
+        const library = this.state.library;
+        library.map(singleprocedure => {
+          if(singleprocedure.hasOwnProperty('id') === false){
+            return   singleprocedure.id =  Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+          }
+        })
+        for(let i = 0; i<3;i++){
+          if(tasks[i].hasOwnProperty('procedureId') === false){
+            tasks[i].procedureId = library[0].id;
+          }
+        }
+        for(let i = 3; i<6;i++){
+          if(tasks[i].hasOwnProperty('procedureId') === false){ 
+            tasks[i].procedureId = library[1].id;
+          }
+        }
+        this.setState({
+          library,
+          tasks
+        });
+ }
 
   render() {
-   // console.log(this.state)
     const {library, tasks} = this.state;
     return (
       <MuiThemeProvider>
         <div>
           {
             this.state.projects.map((singleproject, index) =>{
-              singleproject.projectId = index;
+              singleproject.projectId = index;  // this needs to be fixed later on to provide unique id
               return (
                 <div key={singleproject.projectId}>
                   <TopBar/>
@@ -163,6 +166,7 @@ class App extends Component {
                     handleWhereInput={this.handleWhereInput}
                     handleStartDate={this.handleStartDate}
                     handleEndDate={this.handleEndDate}
+                    setProcedureId={this.setProcedureId}
                   />
                 </div>
               )

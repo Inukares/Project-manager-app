@@ -7,17 +7,22 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const styles = {marginBottom:'-8px'}
 
+const buttonStyle = {margin:'0px 18px 0px 0px'}
+
+const labelMargin = {marginLeft:'14px'}
+
 const ProceduresList = props => {
-    const list = props.library.map(procedure => {
+    const list = props.library.map((procedure, index) => {
         const {id, procedureName} = procedure; 
         return(
             <List className="text-left" key={procedureName} style={styles} >
                 <ListItem 
                   className="text-center"
+                  style={labelMargin}
                   open={procedure.expanded}
                   primaryText={procedureName}
                   rightIconButton={(
-                      <FloatingActionButton mini={true} onClick={() => props.handleActiveProcedures(procedure)}>
+                      <FloatingActionButton style={buttonStyle} mini={true} onClick={() => props.handleActiveProcedures(procedure)}>
                         <ContentAdd />
                       </FloatingActionButton>
                     )}

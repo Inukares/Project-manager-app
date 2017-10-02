@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import AddProcedureButton from './../container/AddProcedureButton.js'
 import GetProjectNameInput from './GetProjectNameInput.js'
@@ -7,22 +7,25 @@ import GetStartDate from './GetStartDate.js'
 import GetEndDate from './GetEndDate.js';
 import Subheader from 'material-ui/Subheader';
 import ActiveProceduresList from './ActiveProceduresList.js'
+import dates from '../customstylesheets/dates.css';
 
 const style = {
   textAlign:'center',
   fontWeight:'600',
-  marginLeft:'30px'
+  marginLeft:'48px' // margin needed to delete pushing of right button
 }
+
+const titleStyle = {marginLeft:'48px'};
 
 const h4Style = {
-  margin:'-6px 0 0 0'
+  margin:'-6px 0 0 0',
 }
 
-const paddingStyle={paddingLeft:'0px',paddingRight:'29px', margin:'0 auto', width:'100%'};
+const paddingStyle={marginLeft:'8px', paddingLeft:'0px',paddingRight:'0px', margin:'0 auto', width:'100%'};
 
 const activeProcedures = [];
 
-export default class ExpandingCard extends React.Component {
+export default class ExpandingCard extends Component {
 
   constructor(props) {
     super(props);
@@ -31,6 +34,10 @@ export default class ExpandingCard extends React.Component {
       style,
       activeProcedures
     };
+  }
+
+  componentWillMount(){
+    this.props.setProcedureId();
   }
 
   handleExpandChange = (expanded) => {
@@ -127,6 +134,7 @@ export default class ExpandingCard extends React.Component {
           style={style}
           actAsExpander={true}
           showExpandableButton={true}
+          titleStyle={titleStyle}
         />
         <CardText expandable={true} style={paddingStyle} >
           <div className="text-center" >
@@ -145,13 +153,16 @@ export default class ExpandingCard extends React.Component {
             deleteActiveProcedure={this.deleteActiveProcedure}
           />
           </div>
-           <AddProcedureButton
-             library={this.props.library}
-             tasks={this.props.tasks}
-             onTaskToggle={this.props.onTaskToggle}
-             onProcedureToggle={this.props.onProcedureToggle}
-             handleActiveProcedures={this.handleActiveProcedures}
-           />
+          <div id="addProcedureButton">
+            <AddProcedureButton
+              fullWidth={true}
+              library={this.props.library}
+              tasks={this.props.tasks}
+              onTaskToggle={this.props.onTaskToggle}
+              onProcedureToggle={this.props.onProcedureToggle}
+              handleActiveProcedures={this.handleActiveProcedures}
+            />
+           </div>
         </CardText>
       </Card>
     );

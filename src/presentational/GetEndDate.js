@@ -20,16 +20,3 @@ const GetEndDate = props => {
 }
 
 export default GetEndDate;
-
-
-/*     const Input = (
-    <div >
-        <Subheader>When do want to start your project?</Subheader>
-        <DatePicker 
-          onChange={(e, date) => {props.handleStartDate(e, date, props.project)}} 
-          value={props.project.startDate}
-          id="date"
-          />
-    </div>
-    )
-    return <div>{Input}</div> */

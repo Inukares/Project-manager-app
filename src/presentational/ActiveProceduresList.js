@@ -10,8 +10,10 @@ const editsvg = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" v
 
 const styles = {marginBottom:'-8px'}
 
+const buttonStyle = {margin:'0px 18px 0px 0px'}
+
 const ActiveProceduresList = props => {
-    const list = props.library.map(procedure => {
+    const list = props.library.map((procedure) => {
         const {id, procedureName} = procedure; 
         return(
             <List className="text-left" key={procedureName} style={styles} >
@@ -20,9 +22,9 @@ const ActiveProceduresList = props => {
                   open={procedure.expanded}
                   primaryText={procedureName} 
                   rightIconButton={(
-                      <FloatingActionButton mini={true} onClick={() => props.deleteActiveProcedure(procedure)}>
-                          <ContentDeleteSweep/>
-                      </FloatingActionButton>
+                        <FloatingActionButton style={buttonStyle} mini={true} onClick={() => props.deleteActiveProcedure(procedure)}>
+                            <ContentDeleteSweep />
+                        </FloatingActionButton>
                     )}
                   onClick={() => props.onProcedureToggle(procedure)} nestedItems = {[
                     <FinishedTasksMessage 

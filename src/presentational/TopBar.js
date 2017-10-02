@@ -1,15 +1,17 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
-const style={textAlign:'center'}
+//const style={textAlign:'center'}
 
 const TopBar = () => {
     return (
     <AppBar
-    style={style}
-    title="Manage your projects easily"
+    //style={style}
+    className="text-center"
+    title="Project Manager App"
     showMenuIconButton={false}
-    iconClassNameRight="search-button"
+    iconElementRight={<div></div>}
+   // iconClassNameRight="search-button"
     />
     )
 }
