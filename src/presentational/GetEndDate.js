@@ -1,7 +1,7 @@
 import React from 'react'
 import Subheader from 'material-ui/Subheader'
 import DatePicker from 'material-ui/DatePicker';
-import dates from '../customstylesheets/dates.css';
+import '../customstylesheets/dates.css';
 
 
 const GetEndDate = props => {

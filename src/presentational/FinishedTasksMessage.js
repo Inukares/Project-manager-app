@@ -15,16 +15,4 @@ const FinishedTasksMessage = props => {
     )
 }
 
-
 export default FinishedTasksMessage;
-
-
-/*
-const FinishedTasksMessage = props => {
-    return(
-        <Subheader style={styles}>
-            Tasks completed: {props.procedure.completedTasks}/{props.tasks.length}
-        </Subheader>
-
-    )
-} */

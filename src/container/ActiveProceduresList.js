@@ -1,6 +1,6 @@
 import React from 'react';
-import ListingAddedTasks from '../container/ListingAddedTasks';
-import FinishedTasksMessage from './FinishedTasksMessage.js';
+import ListingAddedTasks from '../presentational/ListingAddedTasks';
+import FinishedTasksMessage from '../presentational/FinishedTasksMessage.js';
 import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentDeleteSweep from 'material-ui/svg-icons/content/delete-sweep'

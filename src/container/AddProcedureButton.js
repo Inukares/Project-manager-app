@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
-import ProceduresList from '../presentational/ProceduresList'
+import ProceduresList from './ProceduresList'
 
 const style = {
   margin:'12px 12px 12px',

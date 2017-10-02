@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import AddProcedureButton from './../container/AddProcedureButton.js'
-import GetProjectNameInput from './GetProjectNameInput.js'
-import GetProjectPlaceInput from './GetProjectPlaceInput.js'
-import GetStartDate from './GetStartDate.js'
-import GetEndDate from './GetEndDate.js';
+import AddProcedureButton from './AddProcedureButton.js'
+import GetProjectNameInput from '../presentational/GetProjectNameInput.js'
+import GetProjectPlaceInput from '../presentational/GetProjectPlaceInput.js'
+import GetStartDate from '../presentational/GetStartDate.js'
+import GetEndDate from '../presentational/GetEndDate.js';
 import Subheader from 'material-ui/Subheader';
 import ActiveProceduresList from './ActiveProceduresList.js'
-import dates from '../customstylesheets/dates.css';
+import '../customstylesheets/dates.css';
 
 const style = {
   textAlign:'center',

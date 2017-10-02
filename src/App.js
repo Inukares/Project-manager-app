@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from './presentational/TopBar.js';
-import ExpandingCard from './presentational/ExpandingCard.js'
+import ExpandingCard from './container/ExpandingCard.js'
 
 const projects = [
   {

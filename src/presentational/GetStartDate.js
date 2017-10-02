@@ -1,14 +1,10 @@
 import React, {Component} from 'react'
 import Subheader from 'material-ui/Subheader'
 import DatePicker from 'material-ui/DatePicker';
-import dates from '../customstylesheets/dates.css';
+import '../customstylesheets/dates.css';
 
 
 export default class GetStartDate extends Component {
-    constructor(props){
-        super(props);
-    }
-
     renderDate = () => {
         const DateComponent = (
             <div>
