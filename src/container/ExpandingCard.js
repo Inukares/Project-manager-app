@@ -24,6 +24,7 @@ const h4Style = {
 const paddingStyle={marginLeft:'8px', paddingLeft:'0px',paddingRight:'0px', margin:'0 auto', width:'100%'};
 
 const activeProcedures = [];
+const activeTasks = [];
 
 export default class ExpandingCard extends Component {
 
@@ -32,7 +33,8 @@ export default class ExpandingCard extends Component {
     this.state = {
       expanded: false,
       style,
-      activeProcedures
+      activeProcedures,
+      activeTasks
     };
   }
 
@@ -66,19 +68,22 @@ export default class ExpandingCard extends Component {
     }
   }
 
-  handleActiveProcedures = (procedure) => {
+  handleActiveProcedures = (procedure) => {// if this app will be updated, it shall take task as parameter as well
     let activeProcedures = this.state.activeProcedures;
     let copiedProcedure = JSON.parse(JSON.stringify(procedure));
     let flag = true;
+
     activeProcedures.map(singleprocedure => {
       if(JSON.stringify(singleprocedure) === JSON.stringify(procedure))
       {
        return flag = false;
       }});
+
     if(flag)
     {
        activeProcedures.push(copiedProcedure);
     }
+    
     this.setState({
       activeProcedures
     })
@@ -88,8 +93,11 @@ export default class ExpandingCard extends Component {
     let activeProcedures = this.state.activeProcedures;
     let deleteId = procedure.id;
     let newActiveProcedures = JSON.parse(JSON.stringify(activeProcedures.filter(singleprocedure => {
+      this.props.updateTasksCompletion(singleprocedure);
       return singleprocedure.id !== deleteId;
     })))
+
+    
     this.setState({
       activeProcedures:newActiveProcedures
     })

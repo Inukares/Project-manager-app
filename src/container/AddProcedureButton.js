@@ -4,10 +4,12 @@ import ProceduresList from './ProceduresList'
 
 const style = {
   margin:'12px 12px 12px',
-  marginLeft: '15px',
+  marginLeft: '13px',
   padding: 0,
   textAlign:'center'
 };
+
+const labelStyle={marginLeft:'-8px'};
 
 class AddProcedureButton extends Component {
     constructor(props){
@@ -29,6 +31,7 @@ class AddProcedureButton extends Component {
             <div>
             <RaisedButton
               label="Add procedure to your project"
+              labelStyle={labelStyle}
               onClick={() => this.onButtonToggle(isButtonClicked)}
               secondary={true}
               style={style} 

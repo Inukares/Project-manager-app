@@ -22,7 +22,3 @@ const ListingAddedTasks = (props) => {
 }
 
 export default ListingAddedTasks 
-
-
-
-

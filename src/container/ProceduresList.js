@@ -10,9 +10,11 @@ const buttonStyle = {margin:'0px 18px 0px 0px'}
 
 const labelMargin = {marginLeft:'14px'}
 
+
 const ProceduresList = props => {
     const list = props.library.map((procedure, index) => {
         const {id, procedureName} = procedure; 
+        
         return(
             <List className="text-left" key={procedureName} style={styles} >
                 <ListItem 

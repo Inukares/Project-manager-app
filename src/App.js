@@ -80,6 +80,18 @@ class App extends Component {
     })
   }
 
+  updateTasksCompletion = (procedure) => {
+    let tasks = this.state.tasks;
+    tasks.map(task => {
+      if(task.procedureId === procedure.id){
+        task.isCompleted = false;
+      }
+    })
+    this.setState({
+      tasks
+    })
+  }
+
   onProcedureToggle = (procedure) => {
     procedure.expanded = !procedure.expanded;
     this.setState({
@@ -152,7 +164,7 @@ class App extends Component {
         <div>
           {
             this.state.projects.map((singleproject, index) =>{
-              singleproject.projectId = index;  // this needs to be fixed later on to provide unique id
+              singleproject.projectId = index;
               return (
                 <div key={singleproject.projectId}>
                   <TopBar/>
@@ -167,6 +179,7 @@ class App extends Component {
                     handleStartDate={this.handleStartDate}
                     handleEndDate={this.handleEndDate}
                     setProcedureId={this.setProcedureId}
+                    updateTasksCompletion={this.updateTasksCompletion}
                   />
                 </div>
               )
