@@ -80,13 +80,15 @@ class App extends Component {
     })
   }
 
-  updateTasksCompletion = (procedure) => {
+  updateTasksCompletion = (id) => {
     let tasks = this.state.tasks;
+
     tasks.map(task => {
-      if(task.procedureId === procedure.id){
+      if(task.procedureId === id){
         task.isCompleted = false;
       }
     })
+    
     this.setState({
       tasks
     })

@@ -92,12 +92,11 @@ export default class ExpandingCard extends Component {
   deleteActiveProcedure = (procedure) => {
     let activeProcedures = this.state.activeProcedures;
     let deleteId = procedure.id;
+    this.props.updateTasksCompletion(deleteId);
     let newActiveProcedures = JSON.parse(JSON.stringify(activeProcedures.filter(singleprocedure => {
-      this.props.updateTasksCompletion(singleprocedure);
       return singleprocedure.id !== deleteId;
     })))
 
-    
     this.setState({
       activeProcedures:newActiveProcedures
     })
